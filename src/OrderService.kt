@@ -1,3 +1,17 @@
+class MailServices
+{
+    var Heading:String=""
+    var Content:String=""
+    fun SendNotification(message:String,heading:String)
+    {
+        println(" Heading: "+heading)
+        println(" Content: "+message)
+    }
+}
+
+
+
+
 class OrderService {
     var AppleCount:Int=0
     var OrangeCount:Int=0
@@ -8,24 +22,38 @@ class OrderService {
     {
         for(element in orders)
         {
-            if(element.toUpperCase()=="APPLE")
+            if(element.toLowerCase()=="apple")
             {
                 this.AppleCount++
             }
-            if(element.toUpperCase()=="ORANGE")
+            if(element.toLowerCase()=="apple")
             {
                 this.OrangeCount++
             }
 
         }
+        this.ProcessOrder(orders);
 
-        this.CalculatePrice(this.AppleCount,this.OrangeCount)
+
 
     }
 
-    fun CalculatePrice(AppleCount:Int,OrangeCount:Int)
+    fun CalculatePrice(AppleCount:Int,OrangeCount:Int):Double
     {
-        println("$"+(AppleCount*this.AppleCost+OrangeCount*this.OrangeCost).toDouble()/100)
+        var Price:Double =(AppleCount*this.AppleCost+OrangeCount*this.OrangeCost).toDouble()/100
+
+        return Price
+    }
+
+
+    fun ProcessOrder(orders:Array<String>)
+    {
+        this.CalculatePrice(this.AppleCount,this.OrangeCount)
+        var Price:Double=this.CalculatePrice(this.AppleCount,this.OrangeCount)
+        var notificationHeader:String=" Your Order has been Placed Successfully"
+        var orderDetail:String=" Apples : Qty= "+this.AppleCount+"\n"+ "Oranges : Qty= "+this.OrangeCount
+        var mailService=MailServices()
+        mailService.SendNotification(notificationHeader,orderDetail)
     }
 
 
