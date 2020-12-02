@@ -27,6 +27,21 @@ class OrderService {
     {
         println("$"+(AppleCount*this.AppleCost+OrangeCount*this.OrangeCost).toDouble()/100)
     }
+
+
+    fun GetOfferDetail()
+    {
+        println("Buy one get one free on Apples")
+        println("3 for the price of 2 on Oranges")
+    }
+
+    fun ApplySimpleOffer(AppleCount:Int,OrangeCount:Int)
+    {
+        var offeredApples=this.AppleCount*2
+        var offeredOranges=this.OrangeCount + this.OrangeCount/2
+        println("Offered Apple is  : "+offeredApples)
+        println("Offered Orange is  : "+offeredOranges)
+    }
 }
 
 fun main(args:Array<String>) {
